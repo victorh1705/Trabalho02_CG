@@ -1,0 +1,5 @@
+/home/victor/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/182.3911.40/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/home/victor/Documentos/Programs/C e C++/CG"
+-- Found GLUT: /usr/lib/x86_64-linux-gnu/libglut.so  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/victor/Documentos/Programs/C e C++/CG/cmake-build-debug

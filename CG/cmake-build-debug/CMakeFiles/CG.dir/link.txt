@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/CG.dir/src/projection.cpp.o CMakeFiles/CG.dir/src/quad.cpp.o  -o ../bin/CG 
