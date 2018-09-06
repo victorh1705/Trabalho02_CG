@@ -7,61 +7,60 @@
   Description: Simple opengl program
 */
 
-#include <stdio.h>
 #include <GL/glut.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <ctype.h>
+#include "display.h"
+#include "extra.h"
+
 
 void display(void);
 void init (void);
 void keyboard(unsigned char key, int x, int y);
 
-int main(int argc, char** argv)
-{
-   glutInit(&argc, argv);
-   glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
-   glutInitWindowSize (250, 250);
-   glutInitWindowPosition (100, 100);
-   glutCreateWindow ("Quad Test");
-   init ();
-   glutDisplayFunc(display);
-   glutKeyboardFunc(keyboard);
 
-	printf("Pressione ESC para fechar.\n");
+void criaPlano(){
+    glPushMatrix();
+        glTranslatef(0.0, 0.0, 0.0);
+        glScalef(20.0 , 20.0, 5.0);
+        glutSolidCube(1.0);
+    glPopMatrix();
 
-   glutMainLoop();
-
-   return 0;
 }
 
 void display(void)
 {
-   // Limpar todos os pixels
-   glClear (GL_COLOR_BUFFER_BIT);
+    glMatrixMode (GL_PROJECTION);
+    glLoadIdentity ();
+    gluPerspective(40.0f,(GLfloat)width/(GLfloat)height, 0.1 ,2500);
 
-   // Desenhar um polígono branco (retângulo)
-   glColor3f (1.0, 1.0, 1.0);
-   glBegin(GL_POLYGON);
-      glVertex3f (0.25, 0.25, 0.0);
-      glVertex3f (0.75, 0.25, 0.0);
-      glVertex3f (0.75, 0.75, 0.0);
-      glVertex3f (0.25, 0.75, 0.0);
-   glEnd();
+//    RotateCamera();
 
-   glutSwapBuffers ();
-}
+    gluLookAt (200.0f, 0.0f, 0.0f,
+               0.0f, 0.0f, 0.0f,
+               0.0f, 0.0f, 1.0f);
+
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity ();
 
 
-void init (void)
-{
-   // selecionar cor de fundo (preto)
-   glClearColor (0.0, 0.0, 0.0, 0.0);
+    glPushMatrix();
+        setMaterial();
+        glTranslatef(0.0, 0.0, 15.0); /// Posicionamento inicial da esfera
+        glutSolidSphere(5.0, 10.0, 10.0);
+    glPopMatrix();
 
-   // inicializar sistema de viz.
-   glMatrixMode(GL_PROJECTION);              // Seleciona Matriz de Projeção
-   glLoadIdentity();
-   glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
 
-   glMatrixMode(GL_MODELVIEW); // Select The Modelview Matrix
-   glLoadIdentity();           // Inicializa com matriz identidade
+    criaPlano();
+
+    glMatrixMode (GL_PROJECTION);
+    glLoadIdentity ();
+
+    glutSwapBuffers();
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -72,4 +71,35 @@ void keyboard(unsigned char key, int x, int y)
          exit(0);
       break;
    }
+}
+
+void init(void)
+{
+   glClearColor (0.5, 0.5, 0.5, 0.0);
+   glShadeModel (GL_SMOOTH);
+   glEnable(GL_DEPTH_TEST);               /// Habilita Z-buffer
+   initLight(width, height);
+}
+
+
+int main(int argc, char** argv)
+{
+   glutInit(&argc, argv);
+   glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB| GLUT_DEPTH);
+   glutInitWindowSize (width, height);
+   glutInitWindowPosition (100, 100);
+   glutCreateWindow ("Maze");
+   init ();
+   glutDisplayFunc(display);
+   glutKeyboardFunc(keyboard);
+//   glutIdleFunc( idle);
+   glutReshapeFunc(reshape);
+//   glutMotionFunc( motion );
+//   glutSpecialUpFunc( specialKeyRelease);
+
+	printf("Pressione ESC para fechar.\n");
+
+   glutMainLoop();
+
+   return 0;
 }

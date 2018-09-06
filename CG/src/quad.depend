@@ -1,5 +1,14 @@
 # depslib dependency file v1.0
-1409787732 source:/home/victor/Documentos/Programs/C e C++/Trabalho 02/CG/src/quad.cpp
-	<stdio.h>
+1536197391 source:/home/victor/Documentos/Programs/C e C++/Trabalho 02/CG/src/quad.cpp
 	<GL/glut.h>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<ctype.h>
+	"display.h"
+	"extra.h"
+
+1536197430 /home/victor/Documentos/Programs/C e C++/Trabalho 02/CG/src/display.h
+
+1536196968 /home/victor/Documentos/Programs/C e C++/Trabalho 02/CG/src/extra.h
 
