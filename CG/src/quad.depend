@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1409787732 source:/home/victor/Documentos/Programs/C e C++/Trabalho 02/CG/src/quad.cpp
+	<stdio.h>
+	<GL/glut.h>
+
