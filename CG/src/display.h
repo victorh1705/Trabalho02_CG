@@ -1,5 +1,5 @@
 // Globals
-float desiredFPS = 30;
+float desiredFPS = 100;
 int width  = 1000;
 int height = 700;
 
@@ -17,9 +17,9 @@ void criarPlanoVermelho(float posicaoInicialY, float posicaoFinalY, float transl
 
 void reshape (int w, int h)
 {
-   width = w;
-   height = h;
-   glViewport (0, 0, (GLsizei) w, (GLsizei) h);
+    width = w;
+    height = h;
+    glViewport (0, 0, (GLsizei) w, (GLsizei) h);
 }
 
 

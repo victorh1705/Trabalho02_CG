@@ -14,6 +14,8 @@
 #include <ctype.h>
 #include "extra.h"
 #include "display.h"
+#include "gravidade.h"
+#include "keyboard.h"
 
 void display(void);
 void init (void);
@@ -38,7 +40,7 @@ void display(void)
 //    RotateCamera();
 
     gluLookAt (400.0f, 0.0f, 0.0f,
-               0.0f, 0.0f, 0.0f,
+               focoX, 0.0f, focoY,
                0.0f, 0.0f, 1.0f);
 
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -49,7 +51,7 @@ void display(void)
 
     glPushMatrix();
         setMaterial();
-        glTranslatef(0.0, 0.0, 15.0); /// Posicionamento inicial da esfera
+        glTranslatef(0.0, 0.0, zBola); /// Posicionamento inicial da esfera
         glutSolidSphere(5.0, 10.0, 10.0);
     glPopMatrix();
 
@@ -61,16 +63,6 @@ void display(void)
     glLoadIdentity ();
 
     glutSwapBuffers();
-}
-
-void keyboard(unsigned char key, int x, int y)
-{
-   switch (key)
-   {
-      case 27:
-         exit(0);
-      break;
-   }
 }
 
 void init(void)
@@ -92,7 +84,7 @@ int main(int argc, char** argv)
    init ();
    glutDisplayFunc(display);
    glutKeyboardFunc(keyboard);
-//   glutIdleFunc( idle);
+   glutIdleFunc( idle);
    glutReshapeFunc(reshape);
 //   glutMotionFunc( motion );
 //   glutSpecialUpFunc( specialKeyRelease);
