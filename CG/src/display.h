@@ -5,7 +5,7 @@ int height = 700;
 
 void reshape (int w, int h)
 {
-   width = w;
-   height = h;
-   glViewport (0, 0, (GLsizei) w, (GLsizei) h);
+    width = w;
+    height = h;
+    glViewport (0, 0, (GLsizei) w, (GLsizei) h);
 }
