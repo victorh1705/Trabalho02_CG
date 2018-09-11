@@ -12,9 +12,8 @@
 #include <stdlib.h>
 #include <math.h>
 #include <ctype.h>
-#include "display.h"
 #include "extra.h"
-
+#include "display.h"
 
 void display(void);
 void init (void);
@@ -34,11 +33,11 @@ void display(void)
 {
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
-    gluPerspective(40.0f,(GLfloat)width/(GLfloat)height, 0.1 ,2500);
+    gluPerspective(40.0f,(GLfloat)width/(GLfloat)height, 0.1 , 1000);
 
 //    RotateCamera();
 
-    gluLookAt (200.0f, 0.0f, 0.0f,
+    gluLookAt (400.0f, 0.0f, 0.0f,
                0.0f, 0.0f, 0.0f,
                0.0f, 0.0f, 1.0f);
 
@@ -55,7 +54,8 @@ void display(void)
     glPopMatrix();
 
 
-    criaPlano();
+
+    criaPlanos();
 
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();

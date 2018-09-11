@@ -33,6 +33,36 @@ void setMaterial(void)
    GLfloat objeto_brilho[]    = { 90.0f };
 
    // Define os parametros da superficie a ser iluminada
+   glMaterialfv(GL_FRONT, GL_AMBIENT, objeto_ambient);/// muda a cor do objeto
+   glMaterialfv(GL_FRONT, GL_DIFFUSE, objeto_difusa);
+   glMaterialfv(GL_FRONT, GL_SPECULAR, objeto_especular);
+   glMaterialfv(GL_FRONT, GL_SHININESS, objeto_brilho);
+}
+
+void setMaterialVermelho(void)
+{
+   // Material do objeto (neste caso, ruby). Parametros em RGBA
+   GLfloat objeto_ambient[]   = { 0.8, 0.01, 0.01, 1.0 };
+   GLfloat objeto_difusa[]    = { 0.6, 0.03, 0.03, 1.0 };
+   GLfloat objeto_especular[] = { 0.7, 0.6, 0.6, 1.0 };
+   GLfloat objeto_brilho[]    = { 90.0f };
+
+   // Define os parametros da superficie a ser iluminada
+   glMaterialfv(GL_FRONT, GL_AMBIENT, objeto_ambient);
+   glMaterialfv(GL_FRONT, GL_DIFFUSE, objeto_difusa);
+   glMaterialfv(GL_FRONT, GL_SPECULAR, objeto_especular);
+   glMaterialfv(GL_FRONT, GL_SHININESS, objeto_brilho);
+}
+
+void setMaterialPreto(void)
+{
+   // Material do objeto (neste caso, ruby). Parametros em RGBA
+   GLfloat objeto_ambient[]   = { 0., 0., 0., 1.0 };
+   GLfloat objeto_difusa[]    = { 0., 0., 0., 1.0 };
+   GLfloat objeto_especular[] = { 0., 0., 0., 1.0 };
+   GLfloat objeto_brilho[]    = { 90.0f };
+
+   // Define os parametros da superficie a ser iluminada
    glMaterialfv(GL_FRONT, GL_AMBIENT, objeto_ambient);
    glMaterialfv(GL_FRONT, GL_DIFFUSE, objeto_difusa);
    glMaterialfv(GL_FRONT, GL_SPECULAR, objeto_especular);
