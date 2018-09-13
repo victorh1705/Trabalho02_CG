@@ -17,6 +17,9 @@
 #include "gravidade.h"
 #include "keyboard.h"
 
+float width_windows  = 800.0;
+float height_windows = 700.0;
+
 void display(void);
 void init (void);
 void keyboard(unsigned char key, int x, int y);
@@ -35,9 +38,7 @@ void display(void)
 {
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
-    gluPerspective(40.0f,(GLfloat)width/(GLfloat)height, 0.1 , 1000);
-
-//    RotateCamera();
+    glOrtho (-width/2, width/2, -height/2, height/2, 0.1, 500.0);//    RotateCamera();
 
     gluLookAt (400.0f, 0.0f, 0.0f,
                focoX, 0.0f, focoY,
@@ -78,7 +79,7 @@ int main(int argc, char** argv)
 {
    glutInit(&argc, argv);
    glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB| GLUT_DEPTH);
-   glutInitWindowSize (width, height);
+   glutInitWindowSize (width_windows, height_windows);
    glutInitWindowPosition (100, 100);
    glutCreateWindow ("Maze");
    init ();

@@ -30,3 +30,5 @@
 CG/bin/
 
 *.depend
+
+*.layout
