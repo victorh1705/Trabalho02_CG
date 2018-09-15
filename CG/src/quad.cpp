@@ -17,23 +17,23 @@
 using namespace std;
 
 float desiredFPS = 100;
-int width  = 100;
+int width = 100;
 int height = 100;
 
 const float TAMANHO_X = 20.0;
 const float TAMANHO_Z = 5.0;
 
-float altura_entre_bloco = 40.0;
+float altura_entre_bloco = -60.0;
 
 float tamanho_tela_pespectiva = 400.0;
 
-float limite_janela_esquerda = (float) -(width/2);
-float limite_janela_direita = (float) (width/2);
+float limite_janela_esquerda = (float)-(width / 2);
+float limite_janela_direita = (float)(width / 2);
 
 float limite_esquerda = 0.0;
 float limite_direita = 0.0;
 
-float width_windows  = 800.0;
+float width_windows = 800.0;
 float height_windows = 700.0;
 
 float zBola = 0.0;
@@ -46,9 +46,10 @@ bool inicializado = false;
 #include <Esfera.h>
 #include <plano.h>
 
-Esfera* esfera;
-vector<Plano*> Preto;
-vector <Plano*> vermelho;
+Esfera *esfera;
+vector<Plano *> preto;
+vector<Plano *> vermelho;
+vector<Plano *> vermelhoMovel;
 
 #include "extra.h"
 #include "display.h"
@@ -56,87 +57,84 @@ vector <Plano*> vermelho;
 #include "keyboard.h"
 
 void display(void);
-void init (void);
+void init(void);
 void keyboard(unsigned char key, int x, int y);
 
-
-void criaPlano(){
+void criaPlano()
+{
     glPushMatrix();
-        glTranslatef(0.0, 0.0, 0.0);
-        glScalef(20.0 , 20.0, 5.0);
-        glutSolidCube(1.0);
+    glTranslatef(0.0, 0.0, 0.0);
+    glScalef(20.0, 20.0, 5.0);
+    glutSolidCube(1.0);
     glPopMatrix();
-
 }
 
-void inicializa(){
+void inicializa()
+{
     esfera = new Esfera(0.0, 0.0, zBola, 5.0);
 }
 
 void display(void)
 {
-    if(!inicializado){
+    if (!inicializado)
+    {
         inicializa();
         inicializado = true;
     }
 
-    glMatrixMode (GL_PROJECTION);
-    glLoadIdentity ();
-    glOrtho (-width/4, width/4, -height/4, height/4, 0.1, 800.0);//    RotateCamera();
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-width / 4, width / 4, -height / 4, height / 4, 0.1, 800.0); //    RotateCamera();
 
-    gluLookAt (400.0f, 0.0f, 0.0f,
-               focoX, 0.0f, focoY,
-               0.0f, 0.0f, 1.0f);
+    gluLookAt(400.0f, 0.0f, 0.0f,
+              focoX, 0.0f, focoY,
+              0.0f, 0.0f, 1.0f);
 
-    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity ();
-
+    glLoadIdentity();
 
     glPushMatrix();
-        setMaterial();
-        glTranslatef(0.0, 0.0, esfera->GetposicaoZ()); /// Posicionamento inicial da esfera
-        glutSolidSphere(5.0, 10.0, 10.0);
+    setMaterial();
+    glTranslatef(0.0, 0.0, esfera->GetposicaoZ()); /// Posicionamento inicial da esfera
+    glutSolidSphere(5.0, 10.0, 10.0);
     glPopMatrix();
-
-
 
     criaPlanos();
 
-    glMatrixMode (GL_PROJECTION);
-    glLoadIdentity ();
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
 
     glutSwapBuffers();
 }
 
 void init(void)
 {
-   glClearColor (0.5, 0.5, 0.5, 0.0);
-   glShadeModel (GL_SMOOTH);
-   glEnable(GL_DEPTH_TEST);               /// Habilita Z-buffer
-   initLight(width, height);
+    glClearColor(0.5, 0.5, 0.5, 0.0);
+    glShadeModel(GL_SMOOTH);
+    glEnable(GL_DEPTH_TEST); /// Habilita Z-buffer
+    initLight(width, height);
 }
 
-
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-   glutInit(&argc, argv);
-   glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB| GLUT_DEPTH);
-   glutInitWindowSize (width_windows, height_windows);
-   glutInitWindowPosition (100, 100);
-   glutCreateWindow ("Maze");
-   init ();
-   glutDisplayFunc(display);
-   glutKeyboardFunc(keyboard);
-   glutIdleFunc( idle);
-   glutReshapeFunc(reshape);
-//   glutMotionFunc( motion );
-//   glutSpecialUpFunc( specialKeyRelease);
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitWindowSize(width_windows, height_windows);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow("Maze");
+    init();
+    glutDisplayFunc(display);
+    glutKeyboardFunc(keyboard);
+    glutIdleFunc(idle);
+    glutReshapeFunc(reshape);
+    //   glutMotionFunc( motion );
+    //   glutSpecialUpFunc( specialKeyRelease);
 
-	printf("Pressione ESC para fechar.\n");
+    printf("Pressione ESC para fechar.\n");
 
-   glutMainLoop();
+    glutMainLoop();
 
-   return 0;
+    return 0;
 }

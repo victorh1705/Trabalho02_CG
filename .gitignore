@@ -32,3 +32,5 @@ CG/bin/
 *.depend
 
 *.layout
+
+\.vscode/
