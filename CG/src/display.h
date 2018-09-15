@@ -1,19 +1,12 @@
 // Globals
-float desiredFPS = 100;
-int width  = 1000;
-int height = 700;
-
-float tamanho_tela_pespectiva = 400.0;
-
-float limite_janela_esquerda = (float) -(width/2);
-float limite_janela_direita = (float) (width/2);
-
-float limite_esquerda = 0.0;
-float limite_direita = 0.0;
 
 void criarPlano(float posicaoInicialY, float posicaoFinalY, float translateZ);
 void criarPlanoPreto(float posicaoInicialY, float posicaoFinalY, float translateZ);
 void criarPlanoVermelho(float posicaoInicialY, float posicaoFinalY, float translateZ);
+
+void criarLabirinto();
+void setPlanosVermelhos(Plano* p);
+void setPlanosPretos(Plano* p);
 
 void reshape (int w, int h)
 {
@@ -37,6 +30,8 @@ void criaPlanos(){
         glScalef( 20.0, widthPlano, 5.0);
         glutSolidCube(1.0);
     glPopMatrix();
+
+    criarLabirinto();
 
 
     criarPlanoPreto(0.0, 200.0, 80.0);
@@ -74,7 +69,25 @@ void criarPlano(float posicaoInicialY, float posicaoFinalY, float translateZ){
 
     glPushMatrix();
         glTranslatef(0.0, translateY, translateZ);
-        glScalef( 20.0, tamanhoY, 5.0);
+        glScalef( TAMANHO_X, tamanhoY, TAMANHO_Z);
         glutSolidCube(1.0);
     glPopMatrix();
+}
+
+
+void criarLabirinto(){
+    vermelho.push_back(new Plano(20.0, 80.0, altura_entre_bloco*3));
+
+    for_each(vermelho.begin(), vermelho.end(), setPlanosVermelhos);
+    //for_each(preto.begin(), preto.end(), setPlanosPretos);
+}
+
+
+void setPlanosVermelhos(Plano* p){
+    criarPlanoVermelho(p->GetinicialY(), p->GetfinalY(), p->GetposicaoZ());
+}
+
+
+void setPlanosPretos(Plano* p){
+    criarPlanoPreto(p->GetinicialY(), p->GetfinalY(), p->GetposicaoZ());
 }

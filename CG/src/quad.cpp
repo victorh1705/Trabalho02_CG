@@ -12,13 +12,48 @@
 #include <stdlib.h>
 #include <math.h>
 #include <ctype.h>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+float desiredFPS = 100;
+int width  = 100;
+int height = 100;
+
+const float TAMANHO_X = 20.0;
+const float TAMANHO_Z = 5.0;
+
+float altura_entre_bloco = 40.0;
+
+float tamanho_tela_pespectiva = 400.0;
+
+float limite_janela_esquerda = (float) -(width/2);
+float limite_janela_direita = (float) (width/2);
+
+float limite_esquerda = 0.0;
+float limite_direita = 0.0;
+
+float width_windows  = 800.0;
+float height_windows = 700.0;
+
+float zBola = 0.0;
+float focoX = zBola;
+float focoY = zBola;
+
+bool inicializado = false;
+
+#include <AbstractGeom.h>
+#include <Esfera.h>
+#include <plano.h>
+
+Esfera* esfera;
+vector<Plano*> Preto;
+vector <Plano*> vermelho;
+
 #include "extra.h"
 #include "display.h"
 #include "gravidade.h"
 #include "keyboard.h"
-
-float width_windows  = 800.0;
-float height_windows = 700.0;
 
 void display(void);
 void init (void);
@@ -34,11 +69,20 @@ void criaPlano(){
 
 }
 
+void inicializa(){
+    esfera = new Esfera(0.0, 0.0, zBola, 5.0);
+}
+
 void display(void)
 {
+    if(!inicializado){
+        inicializa();
+        inicializado = true;
+    }
+
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
-    glOrtho (-width/2, width/2, -height/2, height/2, 0.1, 500.0);//    RotateCamera();
+    glOrtho (-width/4, width/4, -height/4, height/4, 0.1, 800.0);//    RotateCamera();
 
     gluLookAt (400.0f, 0.0f, 0.0f,
                focoX, 0.0f, focoY,
@@ -52,7 +96,7 @@ void display(void)
 
     glPushMatrix();
         setMaterial();
-        glTranslatef(0.0, 0.0, zBola); /// Posicionamento inicial da esfera
+        glTranslatef(0.0, 0.0, esfera->GetposicaoZ()); /// Posicionamento inicial da esfera
         glutSolidSphere(5.0, 10.0, 10.0);
     glPopMatrix();
 

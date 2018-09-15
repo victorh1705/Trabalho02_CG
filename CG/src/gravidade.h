@@ -1,10 +1,6 @@
 #ifndef GRAVIDADE_H_INCLUDED
 #define GRAVIDADE_H_INCLUDED
 
-float zBola = 0.0;
-float focoX = zBola;
-float focoY = zBola;
-
 float velocidade = 1.0;
 float gravidade = -10.0;
 float dt = 0.1;
@@ -51,7 +47,8 @@ void updateVelocidadePosicao(){
     }
 
     velocidade = velocidade + gravidade*dt;
-    zBola = zBola + (velocidade*dt) + 0.5*gravidade*(dt*dt);
+    zBola = esfera->GetposicaoZ() + (velocidade*dt) + 0.5*gravidade*(dt*dt);
+    esfera->SetposicaoZ(zBola);
 }
 
 bool haColisao(){
