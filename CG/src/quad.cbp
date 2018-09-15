@@ -14,6 +14,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -33,7 +34,13 @@
 			<Add library="png" />
 			<Add library="z" />
 		</Linker>
+		<Unit filename="display.h" />
+		<Unit filename="extra.h" />
+		<Unit filename="gravidade.h" />
+		<Unit filename="include/plano.h" />
+		<Unit filename="keyboard.h" />
 		<Unit filename="quad.cpp" />
+		<Unit filename="src/plano.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
