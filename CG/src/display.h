@@ -26,9 +26,9 @@ void criaPlanos()
 
 void criarLabirinto()
 {
-    vermelho.push_back(new Plano(-50.0, -100.0, 0.0));
-    preto.push_back(new Plano(-100.0, -200.0, 0.0));
-    preto.push_back(new Plano(-15.0, 200.0, 0.0));
+    vermelho.push_back(new Plano(-50.0, -100.0, altura_entre_bloco * 0.0));
+    preto.push_back(new Plano(-100.0, -200.0, altura_entre_bloco * 0.0));
+    preto.push_back(new Plano(-15.0, 200.0, altura_entre_bloco * 0.0));
 
     vermelho.push_back(new Plano(-100.0, -50.0, altura_entre_bloco * 1));
     preto.push_back(new Plano(-50.0, -10.0, altura_entre_bloco * 1));
