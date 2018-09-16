@@ -124,6 +124,7 @@ int main(int argc, char **argv)
     glutInitWindowSize(width_windows, height_windows);
     glutInitWindowPosition(100, 100);
     glutCreateWindow("Maze");
+    glutFullScreen();
     init();
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
