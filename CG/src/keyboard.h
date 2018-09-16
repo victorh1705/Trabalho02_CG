@@ -7,32 +7,40 @@ float gravidadePausa;
 
 void keyboard(unsigned char key, int x, int y)
 {
-    static bool flag = false;
+  static bool flag = false;
 
-   switch (key)
-   {
-      case 'r':
-        velocidade = 25;
-        zBola = 0;
-      break;
+  switch (key)
+  {
+  case 'r':
+    velocidade = 25;
+    zBola = 0;
+    break;
 
-      case 'p':
-       if(flag == false){
-            velocidadePausa = velocidade;
-            gravidadePausa = gravidade;
+  case 'p':
+    if (flag == false)
+    {
+      velocidadePausa = velocidade;
+      gravidadePausa = gravidade;
 
-            velocidade = 0;
-            gravidade = 0;
-            flag = true;
+      velocidade = 0;
+      gravidade = 0;
+      flag = true;
+    }
+    else
+    {
+      velocidade = velocidadePausa;
+      gravidade = gravidadePausa;
+      flag = false;
+    }
 
-       }else{
-            velocidade = velocidadePausa;
-            gravidade = gravidadePausa;
-            flag = false;
-       }
+    break;
 
-      break;
-   }
+  // Sair ao apertar 'Esc'
+  case 27: //Escape key
+    glutDestroyWindow(0);
+    exit(0);
+    break;
+  }
 }
 
 #endif // KEYBOARD_H_INCLUDED
