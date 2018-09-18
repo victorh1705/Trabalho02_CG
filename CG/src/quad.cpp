@@ -37,6 +37,7 @@ float width_windows = 800.0;
 float height_windows = 700.0;
 
 float zBola = 0.0;
+const float POSICAOINICIALZ = 50.0;
 float focoX = zBola;
 float focoY = zBola;
 
@@ -50,6 +51,7 @@ Esfera *esfera;
 vector<Plano *> preto;
 vector<Plano *> vermelho;
 vector<Plano *> vermelhoMovel;
+Plano *fimAzul;
 
 #include "extra.h"
 #include "display.h"
@@ -69,16 +71,11 @@ void criaPlano()
     glPopMatrix();
 }
 
-void inicializa()
-{
-    esfera = new Esfera(0.0, 0.0, zBola, 5.0);
-}
-
 void display(void)
 {
     if (!inicializado)
     {
-        inicializa();
+        esfera = new Esfera(0.0, 0.0, POSICAOINICIALZ, 5.0);
         inicializado = true;
     }
 
@@ -97,8 +94,9 @@ void display(void)
 
     glPushMatrix();
     setMaterial();
-    glTranslatef(0.0, 0.0, esfera->GetposicaoZ()); /// Posicionamento inicial da esfera
-    glutSolidSphere(5.0, 10.0, 10.0);
+    // Posicionamento inicial da esfera
+    glTranslatef(esfera->GetposicaoX(), esfera->GetposicaoY(), esfera->GetposicaoZ());
+    glutSolidSphere(esfera->Getraio(), 10.0, 10.0);
     glPopMatrix();
 
     criaPlanos();
