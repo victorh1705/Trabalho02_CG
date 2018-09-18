@@ -7,6 +7,14 @@ void criarPlanoVermelho(float posicaoInicialY, float posicaoFinalY, float transl
 void criarLabirinto();
 void setPlanosVermelhos(Plano *p);
 void setPlanosPretos(Plano *p);
+void completaVermelho(float posicaoInicial, float z);
+void completaPreto(float posicaoInicial, float z);
+void setVermelho100(float posicaoInicial, float z);
+void setVermelho50(float posicaoInicial, float z);
+void setPreto200(float posicaoInicial, float z);
+void setPreto100(float posicaoInicial, float z);
+void setPreto50(float posicaoInicial, float z);
+void setPlanoAzul(Plano *p);
 
 void criarPlano(float posicaoInicialY, float posicaoFinalY, float translateZ);
 void criarPlano(Plano *p);
@@ -26,9 +34,15 @@ void criaPlanos()
 
 void criarLabirinto()
 {
-    vermelho.push_back(new Plano(-50.0, -100.0, altura_entre_bloco * 0.0));
-    preto.push_back(new Plano(-100.0, -200.0, altura_entre_bloco * 0.0));
-    preto.push_back(new Plano(-15.0, 200.0, altura_entre_bloco * 0.0));
+
+    setVermelho100(-350.0, 0.0);
+    setPreto100(-250.0, 0.0);
+    setVermelho100(-150.0, 0);
+    setPreto50(0.0, 0.0);
+    setVermelho100(50.0, 0.0);
+    setPreto50(150.0, 0.0);
+    setVermelho50(200.0, 0.0);
+    completaVermelho(250.0, 0.0);
 
     vermelho.push_back(new Plano(-100.0, -50.0, altura_entre_bloco * 1));
     preto.push_back(new Plano(-50.0, -10.0, altura_entre_bloco * 1));
@@ -48,6 +62,52 @@ void criarLabirinto()
     preto.push_back(new Plano(-200.0, -50.0, altura_entre_bloco * 4));
     vermelhoMovel.push_back(new Plano(-50.0, -20.0, altura_entre_bloco * 4));
     preto.push_back(new Plano(30.0, 100.0, altura_entre_bloco * 4));
+
+    setPreto200(-350.0, 5);
+    setVermelho100(-100.0, 5);
+    setPreto50(0.0, 5);
+    setPreto50(100.0, 5);
+    setVermelho100(200.0, 5);
+    completaPreto(350.0, 5);
+
+    setVermelho100(-350.0, 6);
+    setPreto50(-250.0, 6);
+    setPreto200(-150.0, 6);
+    setVermelho100(50.0, 6);
+    completaPreto(250.0, 6);
+
+    setPreto50(-350.0, 7);
+    setVermelho100(-300.0, 7);
+    setPreto50(-200.0, 7);
+    setPreto50(-50.0, 7);
+    setVermelho100(0.0, 7);
+    completaPreto(100.0, 7);
+
+    setPreto200(-350.0, 8);
+    setVermelho50(-150.0, 8);
+    setPreto50(-100.0, 8);
+    setVermelho50(-50.0, 8);
+    setPreto50(0.0, 8);
+    completaPreto(150.0, 8);
+
+    setPreto100(-350.0, 9);
+    setVermelho100(-250.0, 9);
+    setPreto100(-150.0, 9);
+    setVermelho50(0.0, 9);
+    setPreto100(50.0, 9);
+    setVermelho100(150.0, 9);
+    completaPreto(250.0, 9);
+
+    setVermelho50(-350, 10);
+    setVermelho100(-300, 10);
+    setPreto50(-200, 10);
+    setPreto50(-100, 10);
+    setVermelho100(0.0, 10);
+    setPreto100(100.0, 10);
+    completaVermelho(200.0, 10);
+
+    //Fim da pilha
+    setPlanoAzul(new Plano(-350.0, 350.0, altura_entre_bloco * 40));
 
     for_each(vermelho.begin(), vermelho.end(), setPlanosVermelhos);
     for_each(preto.begin(), preto.end(), setPlanosPretos);
@@ -89,6 +149,41 @@ void criarPlano(Plano *p)
     glPopMatrix();
 }
 
+void setPreto200(float posicaoInicial, float z)
+{
+    preto.push_back(new Plano(posicaoInicial, (posicaoInicial + 200.0), altura_entre_bloco * z));
+}
+
+void setPreto100(float posicaoInicial, float z)
+{
+    preto.push_back(new Plano(posicaoInicial, (posicaoInicial + 100.0), altura_entre_bloco * z));
+}
+
+void setPreto50(float posicaoInicial, float z)
+{
+    preto.push_back(new Plano(posicaoInicial, (posicaoInicial + 50.0), altura_entre_bloco * z));
+}
+
+void completaPreto(float posicaoInicial, float z)
+{
+    preto.push_back(new Plano(posicaoInicial, 350.0, altura_entre_bloco * z));
+}
+
+void setVermelho100(float posicaoInicial, float z)
+{
+    vermelho.push_back(new Plano(posicaoInicial, (posicaoInicial + 100.0), altura_entre_bloco * z));
+}
+
+void setVermelho50(float posicaoInicial, float z)
+{
+    vermelho.push_back(new Plano(posicaoInicial, (posicaoInicial + 50.0), altura_entre_bloco * z));
+}
+
+void completaVermelho(float posicaoInicial, float z)
+{
+    vermelho.push_back(new Plano(posicaoInicial, 350.0, altura_entre_bloco * z));
+}
+
 void criarPlanoVermelho(Plano *p)
 {
     setMaterialVermelho();
@@ -109,4 +204,11 @@ void criarPlanoPreto(Plano *p)
 void setPlanosPretos(Plano *p)
 {
     criarPlanoPreto(p);
+}
+
+void setPlanoAzul(Plano *p)
+{
+    fimAzul = p;
+    setMaterialAzul();
+    criarPlano(fimAzul);
 }
