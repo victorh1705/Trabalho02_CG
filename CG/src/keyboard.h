@@ -12,10 +12,7 @@ void keyboard(unsigned char key, int x, int y)
   switch (key)
   {
   case 'r':
-    zBola = POSICAOINICIALZ;
-    esfera->SetposicaoZ(zBola);
-    velocidade = 25.0;
-    gravidade = -10.0;
+    renicializaBola();
     break;
 
   case 'p':

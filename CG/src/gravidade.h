@@ -3,7 +3,7 @@
 
 float velocidade = 1.0;
 float gravidade = -10.0;
-float dt = 0.1;
+const float dt = 0.1;
 
 vector<Plano *> colisaoPreto;
 vector<Plano *> colisaoVermelho;
@@ -12,6 +12,7 @@ vector<Plano *> planosPosicaoZ(float z, vector<Plano *> planos);
 void updateVelocidadePosicao();
 void idle();
 bool haColisao();
+void renicializaBola();
 
 void idle()
 {
@@ -37,8 +38,8 @@ void idle()
     float step = 1; // Speed of the animation
 
     updateVelocidadePosicao();
-    vector<Plano *> colisaoVermelho = planosPosicaoZ(-60.0, vermelho);
-    vector<Plano *> colisaoPreto = planosPosicaoZ(-60.0, preto);
+    vector<Plano *> colisaoVermelho = planosPosicaoZ(-0.0, vermelho);
+    vector<Plano *> colisaoPreto = planosPosicaoZ(-0.0, preto);
 
     tLast = t;
 
@@ -76,6 +77,14 @@ vector<Plano *> planosPosicaoZ(float z, vector<Plano *> planos)
         }
     }
     return retorno;
+}
+
+void renicializaBola()
+{
+    zBola = POSICAOINICIALZ;
+    esfera->SetposicaoZ(zBola);
+    velocidade = 25.0;
+    gravidade = -10.0;
 }
 
 #endif // GRAVIDADE_H_INCLUDED

@@ -7,6 +7,8 @@ void criarPlanoVermelho(float posicaoInicialY, float posicaoFinalY, float transl
 void criarLabirinto();
 void setPlanosVermelhos(Plano *p);
 void setPlanosPretos(Plano *p);
+void setPlanoAzul(Plano *p);
+
 void completaVermelho(float posicaoInicial, float z);
 void completaPreto(float posicaoInicial, float z);
 void setVermelho100(float posicaoInicial, float z);
@@ -14,7 +16,6 @@ void setVermelho50(float posicaoInicial, float z);
 void setPreto200(float posicaoInicial, float z);
 void setPreto100(float posicaoInicial, float z);
 void setPreto50(float posicaoInicial, float z);
-void setPlanoAzul(Plano *p);
 
 void criarPlano(float posicaoInicialY, float posicaoFinalY, float translateZ);
 void criarPlano(Plano *p);
