@@ -20,6 +20,8 @@ void setPreto50(float posicaoInicial, float z);
 void criarPlano(float posicaoInicialY, float posicaoFinalY, float translateZ);
 void criarPlano(Plano *p);
 
+float aleatorio = 0.0;
+
 void reshape(int w, int h)
 {
     width = w;
@@ -148,6 +150,11 @@ void criarPlano(Plano *p)
     glScalef(tamX, tamY, tamZ);
     glutSolidCube(1.0);
     glPopMatrix();
+}
+
+void criarPlanoVariavel(Plano *p, float finalY)
+{
+    p->SetposicaoY(finalY);
 }
 
 void setPreto200(float posicaoInicial, float z)

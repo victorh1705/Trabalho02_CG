@@ -4,6 +4,7 @@
 float velocidade = 1.0;
 float gravidade = -10.0;
 const float dt = 0.1;
+float movHarmonicoY = 0.0;
 
 vector<Plano *> colisaoPreto;
 vector<Plano *> colisaoVermelho;
@@ -44,6 +45,20 @@ void idle()
     tLast = t;
 
     glutPostRedisplay();
+}
+
+void movimentoHarminoco(Plano *p)
+{
+    float distance = p->GetfinalY() - p->GetinicialY();
+
+    movHarmonicoY += dt;
+    if (movHarmonicoY > M_PI)
+    {
+        movHarmonicoY = 0.0;
+    }
+
+    float newY = distance * cos(movHarmonicoY);
+    p->SetposicaoY(newY);
 }
 
 void updateVelocidadePosicao()

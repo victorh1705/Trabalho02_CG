@@ -8,6 +8,16 @@ Plano::Plano()
     //ctor
 }
 
+Plano::Plano(float y)
+{
+    new Plano(y, y + 100, 0.0);
+}
+
+Plano::Plano(float y, float z)
+{
+    new Plano(y, y + 100, z);
+}
+
 Plano::Plano(float inicialY, float finalY, float posicaoZ)
 {
     //inicialY(inicialY),finalY(finalY), posicaoZ(posicaoZ){};
