@@ -4,6 +4,8 @@
 void keyboard();
 float velocidadePausa;
 float gravidadePausa;
+float mouseYPausa;
+bool flagMousePausa = false;
 
 void keyboard(unsigned char key, int x, int y)
 {
@@ -12,27 +14,28 @@ void keyboard(unsigned char key, int x, int y)
   switch (key)
   {
   case 'r':
-    velocidade = 25;
-    zBola = 0;
+    zBola = 100;
+    velocidade = 1.0;
     break;
 
   case 'p':
-    if (flag == false)
-    {
-      velocidadePausa = velocidade;
-      gravidadePausa = gravidade;
+     if(flag == false){
+            velocidadePausa = velocidade;
+            gravidadePausa = gravidade;
+            mouseYPausa = mouseY;
+            flagMousePausa = true;
 
-      velocidade = 0;
-      gravidade = 0;
-      flag = true;
-    }
-    else
-    {
-      velocidade = velocidadePausa;
-      gravidade = gravidadePausa;
-      flag = false;
-    }
+            velocidade = 0;
+            gravidade = 0;
+            flag = true;
 
+       }else{
+            velocidade = velocidadePausa;
+            gravidade = gravidadePausa;
+            mouseY = mouseYPausa;
+            flag = false;
+            flagMousePausa = false;
+       }
     break;
 
   // Sair ao apertar 'Esc'
@@ -42,5 +45,13 @@ void keyboard(unsigned char key, int x, int y)
     break;
   }
 }
+
+void motion(int x, int y )
+{
+   if(flagMousePausa == false){
+        mouseY = x/3;
+    }
+}
+
 
 #endif // KEYBOARD_H_INCLUDED

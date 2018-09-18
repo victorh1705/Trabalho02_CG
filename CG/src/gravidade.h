@@ -5,13 +5,16 @@ float velocidade = 1.0;
 float gravidade = -10.0;
 float dt = 0.1;
 
+float posicaoAtual;
+bool colisao = false;
+
 vector<Plano *> colisaoPreto;
 vector<Plano *> colisaoVermelho;
 
 vector<Plano *> planosPosicaoZ(float z, vector<Plano *> planos);
 void updateVelocidadePosicao();
 void idle();
-bool haColisao();
+float haColisao();
 
 void idle()
 {
@@ -37,8 +40,8 @@ void idle()
     float step = 1; // Speed of the animation
 
     updateVelocidadePosicao();
-    vector<Plano *> colisaoVermelho = planosPosicaoZ(-60.0, vermelho);
-    vector<Plano *> colisaoPreto = planosPosicaoZ(-60.0, preto);
+    vector<Plano *> colisaoVermelho = planosPosicaoZ(zBola, vermelho);
+    vector<Plano *> colisaoPreto = planosPosicaoZ(zBola, preto);
 
     tLast = t;
 
@@ -48,9 +51,20 @@ void idle()
 void updateVelocidadePosicao()
 {
 
-    if (zBola <= 0.0)
-    {
+    if(haColisao() != 120){
+        posicaoAtual = haColisao();
+        colisao = true;
         velocidade = 25;
+    }
+
+    if(colisao == true){
+         focoX = focoY = posicaoAtual;
+    }else{
+        focoX = focoY = zBola;
+    }
+
+    if(zBola <= posicaoAtual -5){
+        colisao = false;
     }
 
     velocidade = velocidade + gravidade * dt;
@@ -58,9 +72,20 @@ void updateVelocidadePosicao()
     esfera->SetposicaoZ(zBola);
 }
 
-bool haColisao()
+float haColisao()
 {
-    return false;
+    static int i = 0;
+    if(preto[i]->GetfinalY() < mouseY ){
+        i = 5;
+        return 120;
+    }
+
+    if(preto[i]->GetposicaoZ() + 5  >= zBola){
+        return preto[i]->GetposicaoZ();
+    }
+    if( (vermelho[i]->GetinicialY() <= mouseY) && (vermelho[i]->GetfinalY() <= mouseY) ){
+        return 120;
+    }
 }
 
 vector<Plano *> planosPosicaoZ(float z, vector<Plano *> planos)

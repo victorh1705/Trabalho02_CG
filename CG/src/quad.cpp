@@ -40,6 +40,8 @@ float zBola = 0.0;
 float focoX = zBola;
 float focoY = zBola;
 
+float mouseY = 0.0;
+
 bool inicializado = false;
 
 #include <AbstractGeom.h>
@@ -86,8 +88,8 @@ void display(void)
     glLoadIdentity();
     glOrtho(-width / 4, width / 4, -height / 4, height / 4, 0.1, 800.0); //    RotateCamera();
 
-    gluLookAt(400.0f, 0.0f, 0.0f,
-              focoX, 0.0f, focoY,
+    gluLookAt(400.0f, mouseY, 0.0f,
+              focoX, mouseY, focoY,
               0.0f, 0.0f, 1.0f);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -97,7 +99,7 @@ void display(void)
 
     glPushMatrix();
     setMaterial();
-    glTranslatef(0.0, 0.0, esfera->GetposicaoZ()); /// Posicionamento inicial da esfera
+    glTranslatef(0.0, mouseY, esfera->GetposicaoZ()); /// Posicionamento inicial da esfera
     glutSolidSphere(5.0, 10.0, 10.0);
     glPopMatrix();
 
@@ -130,6 +132,7 @@ int main(int argc, char **argv)
     glutKeyboardFunc(keyboard);
     glutIdleFunc(idle);
     glutReshapeFunc(reshape);
+    glutPassiveMotionFunc( motion );
     //   glutMotionFunc( motion );
     //   glutSpecialUpFunc( specialKeyRelease);
 
