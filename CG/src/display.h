@@ -75,7 +75,7 @@ void criarLabirinto()
     setVermelho100(150.0, 3);
     completaPreto(250.0, 3);
 
-        setPreto200(-350.0, 4);
+    setPreto200(-350.0, 4);
     setVermelho50(-150.0, 4);
     setPreto50(-100.0, 4);
     setVermelho50(-50.0, 4);
@@ -124,6 +124,11 @@ void criarLabirinto()
     setVermelho100(0.0, 10);
     setPreto100(100.0, 10);
     completaVermelho(200.0, 10);
+
+    for (float i = 20.; i < 40; i++)
+    {
+        criarLabirintoAleatorio(i);
+    }
 
     //Fim da pilha
     setPlanoAzul(new Plano(-350.0, 350.0, altura_entre_bloco * 40));
@@ -242,4 +247,105 @@ void setPlanoAzul(Plano *p)
     fimAzul = p;
     setMaterialAzul();
     criarPlano(fimAzul);
+}
+
+void criarLabirintoAleatorio(float z)
+{
+
+    int randnumber = rand() % 11;
+
+    switch (randnumber)
+    {
+    case 0:
+        setVermelho50(-350, z);
+        setVermelho100(-300, z);
+        setPreto50(-200, z);
+        setPreto50(-100, z);
+        setVermelho100(0.0, z);
+        setPreto100(100.0, z);
+        completaVermelho(200.0, z);
+        break;
+    case 1:
+        setVermelho100(-350.0, z);
+        setPreto100(-250.0, z);
+        setVermelho100(-150.0, 0);
+        setPreto50(0.0, z);
+        setVermelho100(50.0, z);
+        setPreto50(150.0, z);
+        setVermelho50(200.0, z);
+        completaVermelho(250.0, z);
+        break;
+    case 2:
+        setPreto200(-350.0, z);
+        setVermelho50(-100.0, z);
+        setPreto100(-50., z);
+        setVermelho50(50., z);
+        setPreto100(100., z);
+        completaVermelho(200., z);
+        break;
+    case 3:
+        setVermelho100(-350.0, z);
+        setPreto50(-250.0, z);
+        setPreto200(-150.0, z);
+        setVermelho100(50.0, z);
+        completaPreto(250.0, z);
+        break;
+    case 4:
+        setPreto100(-350.0, z);
+        setVermelho100(-250.0, z);
+        setPreto100(-150.0, z);
+        setVermelho50(0.0, z);
+        setPreto100(50.0, z);
+        setVermelho100(150.0, z);
+        completaPreto(250.0, z);
+        break;
+    case 5:
+        setPreto200(-350.0, z);
+        setVermelho50(-150.0, z);
+        setPreto50(-100.0, z);
+        setVermelho50(-50.0, z);
+        setPreto50(0.0, z);
+        completaPreto(150.0, z);
+        break;
+    case 6:
+        setPreto200(-350.0, z);
+        setVermelho100(-100.0, z);
+        setPreto50(0.0, z);
+        setPreto50(100.0, z);
+        setVermelho100(200.0, z);
+        completaPreto(350.0, z);
+        break;
+    case 7:
+        setVermelho100(-350.0, z);
+        setPreto50(-250.0, z);
+        setPreto200(-150.0, z);
+        setVermelho100(50.0, z);
+        completaPreto(250.0, z);
+        break;
+    case 8:
+        setPreto50(-350.0, z);
+        setVermelho100(-300.0, z);
+        setPreto50(-200.0, z);
+        setPreto50(-50.0, z);
+        setVermelho100(0.0, z);
+        completaPreto(100.0, z);
+        break;
+    case 9:
+        setPreto200(-350.0, z);
+        setVermelho50(-150.0, z);
+        setPreto50(-100.0, z);
+        setVermelho50(-50.0, z);
+        setPreto50(0.0, z);
+        completaPreto(150.0, z);
+        break;
+    case 10:
+        setPreto100(-350.0, z);
+        setVermelho100(-250.0, z);
+        setPreto100(-150.0, z);
+        setVermelho50(0.0, z);
+        setPreto100(50.0, z);
+        setVermelho100(150.0, z);
+        completaPreto(250.0, z);
+        break;
+    }
 }
