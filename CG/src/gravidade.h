@@ -83,7 +83,6 @@ void updateVelocidadePosicao()
     velocidade = velocidade + gravidade * dt;
     zBola = esfera->GetposicaoZ() + (velocidade * dt) + 0.5 * gravidade * (dt * dt);
     esfera->SetposicaoZ(zBola);
-    printf("zbola %f \n",zBola);
 }
 
 float haColisao()
