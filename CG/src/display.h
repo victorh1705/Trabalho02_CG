@@ -7,6 +7,7 @@ void criarPlanoVermelhoMovel(float posicaoInicialY, float posicaoFinalY, float t
 void criarPlanoVariavel(Plano *p, float finalY);
 
 void criarLabirinto();
+void criarLabirintoAleatorio(float z);
 void setPlanosVermelhos(Plano *p);
 void setPlanosPretos(Plano *p);
 void setPlanoAzul(Plano *p);
@@ -125,7 +126,87 @@ void criarLabirinto()
     setPreto100(100.0, 10);
     completaVermelho(200.0, 10);
 
-    for (float i = 20.; i < 40; i++)
+    setPreto200(-350.0, 11.);
+    setVermelho50(-100.0, 11.);
+    setPreto100(-50., 11.);
+    setVermelho50(50., 11.);
+    setPreto100(100., 11.);
+    completaVermelho(200., 11.);
+
+    setPreto100(-350.0, 12);
+    setVermelho100(-250.0, 12);
+    setPreto100(-150.0, 12);
+    setVermelho50(0.0, 12);
+    setPreto100(50.0, 12);
+    setVermelho100(150.0, 12);
+    completaPreto(250.0, 12);
+
+    setVermelho100(-350.0, 13);
+    setPreto100(-250.0, 13);
+    setVermelho100(-150.0, 13);
+    setPreto50(0.0, 13);
+    setVermelho100(50.0, 13);
+    setPreto50(150.0, 13);
+    setVermelho50(200.0, 13);
+    completaVermelho(250.0, 13);
+
+    setPreto200(-350.0, 14);
+    setVermelho50(-150.0, 14);
+    setPreto50(-100.0, 14);
+    setVermelho50(-50.0, 14);
+    setPreto50(0.0, 14);
+    completaPreto(150.0, 14);
+
+    setPreto200(-350.0, 15);
+    setVermelho100(-100.0, 15);
+    setPreto50(0.0, 15);
+    setPreto50(100.0, 15);
+    setVermelho100(200.0, 15);
+    completaPreto(350.0, 15);
+
+    setVermelho100(-350.0, 16);
+    setPreto50(-250.0, 16);
+    setPreto200(-150.0, 16);
+    setVermelho100(50.0, 16);
+    completaPreto(250.0, 16);
+
+    setPreto50(-350.0, 17);
+    setVermelho100(-300.0, 17);
+    setPreto50(-200.0, 17);
+    setPreto50(-50.0, 17);
+    setVermelho100(0.0, 17);
+    completaPreto(100.0, 17);
+
+    setVermelho100(-350.0, 18);
+    setPreto50(-250.0, 18);
+    setPreto200(-150.0, 18);
+    setVermelho100(50.0, 18);
+    completaPreto(250.0, 18);
+
+    setPreto200(-350.0, 18);
+    setVermelho50(-150.0, 18);
+    setPreto50(-100.0, 18);
+    setVermelho50(-50.0, 18);
+    setPreto50(0.0, 18);
+    completaPreto(150.0, 18);
+
+    setVermelho50(-350, 19);
+    setVermelho100(-300, 19);
+    setPreto50(-200, 19);
+    setPreto50(-100, 19);
+    setVermelho100(0.0, 19);
+    setPreto100(100.0, 19);
+    completaVermelho(200.0, 19);
+
+    setPreto100(-350.0, 20);
+    setVermelho100(-250.0, 20);
+    setPreto100(-150.0, 20);
+    setVermelho50(0.0, 20);
+    setPreto100(50.0, 20);
+    setVermelho100(150.0, 20);
+    completaPreto(250.0, 20);
+
+    for (float i = 21.; i < 40; i++)
     {
         criarLabirintoAleatorio(i);
     }
