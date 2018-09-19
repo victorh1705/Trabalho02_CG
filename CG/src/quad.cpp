@@ -74,6 +74,7 @@ void criaPlano()
 void inicializa()
 {
     esfera = new Esfera(0.0, 0.0, zBola, 5.0);
+    esfera->SetposicaoY(mouseY);
 }
 
 void display(void)
@@ -99,7 +100,7 @@ void display(void)
 
     glPushMatrix();
     setMaterial();
-    glTranslatef(0.0, mouseY, esfera->GetposicaoZ()); /// Posicionamento inicial da esfera
+    glTranslatef(0.0,esfera->GetposicaoY(), esfera->GetposicaoZ()); /// Posicionamento inicial da esfera
     glutSolidSphere(5.0, 10.0, 10.0);
     glPopMatrix();
 
@@ -126,7 +127,7 @@ int main(int argc, char **argv)
     glutInitWindowSize(width_windows, height_windows);
     glutInitWindowPosition(100, 100);
     glutCreateWindow("Maze");
-    glutFullScreen();
+    //glutFullScreen();
     init();
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);

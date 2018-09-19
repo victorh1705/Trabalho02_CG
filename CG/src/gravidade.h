@@ -1,6 +1,3 @@
-#ifndef GRAVIDADE_H_INCLUDED
-#define GRAVIDADE_H_INCLUDED
-
 float velocidade = 1.0;
 float gravidade = -10.0;
 float dt = 0.1;
@@ -40,21 +37,41 @@ void idle()
     float step = 1; // Speed of the animation
 
     updateVelocidadePosicao();
-    vector<Plano *> colisaoVermelho = planosPosicaoZ(zBola, vermelho);
-    vector<Plano *> colisaoPreto = planosPosicaoZ(zBola, preto);
 
     tLast = t;
+
+    esfera->SetposicaoY(mouseY);
 
     glutPostRedisplay();
 }
 
 void updateVelocidadePosicao()
 {
+    vector<Plano *> colisaoVermelho = planosPosicaoZ(zBola, vermelho);
+    vector<Plano *> colisaoPreto = planosPosicaoZ(zBola, preto);
 
-    if(haColisao() != 120){
-        posicaoAtual = haColisao();
-        colisao = true;
-        velocidade = 25;
+    if(!colisaoPreto.empty()){
+        for( int i = 0; i < colisaoPreto.size(); i++){
+            if(colisaoPreto[i]->haColisao(esfera) == true){
+                posicaoAtual = esfera->GetposicaoZ();
+                colisao = true;
+                velocidade = 25;
+                break;
+            }else{
+                colisao = false;
+            }
+        }
+    }
+
+    if(!colisaoVermelho.empty()){
+        for( int i = 0; i < colisaoVermelho.size(); i++){
+            if(colisaoVermelho[i]->haColisao(esfera) == true){
+                esfera->SetposicaoZ(50.0);
+                velocidade = 1.0;
+                colisao = false;
+                break;
+            }
+        }
     }
 
     if(colisao == true){
@@ -63,13 +80,10 @@ void updateVelocidadePosicao()
         focoX = focoY = zBola;
     }
 
-    if(zBola <= posicaoAtual -5){
-        colisao = false;
-    }
-
     velocidade = velocidade + gravidade * dt;
     zBola = esfera->GetposicaoZ() + (velocidade * dt) + 0.5 * gravidade * (dt * dt);
     esfera->SetposicaoZ(zBola);
+    printf("zbola %f \n",zBola);
 }
 
 float haColisao()
@@ -83,6 +97,7 @@ float haColisao()
     if(preto[i]->GetposicaoZ() + 5  >= zBola){
         return preto[i]->GetposicaoZ();
     }
+
     if( (vermelho[i]->GetinicialY() <= mouseY) && (vermelho[i]->GetfinalY() <= mouseY) ){
         return 120;
     }

@@ -6,6 +6,7 @@ float velocidadePausa;
 float gravidadePausa;
 float mouseYPausa;
 bool flagMousePausa = false;
+void restart();
 
 void keyboard(unsigned char key, int x, int y)
 {
@@ -14,8 +15,7 @@ void keyboard(unsigned char key, int x, int y)
   switch (key)
   {
   case 'r':
-    zBola = 100;
-    velocidade = 1.0;
+    restart();
     break;
 
   case 'p':
@@ -51,6 +51,12 @@ void motion(int x, int y )
    if(flagMousePausa == false){
         mouseY = x/3;
     }
+}
+
+void restart(){
+    esfera->SetposicaoZ(50.0);
+    velocidade = 1.0;
+    colisao = false;
 }
 
 
