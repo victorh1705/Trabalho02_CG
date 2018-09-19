@@ -4,7 +4,6 @@
 float velocidade = 1.0;
 float gravidade = -10.0;
 const float dt = 0.1;
-float movHarmonicoY = 0.0;
 
 vector<Plano *> colisaoPreto;
 vector<Plano *> colisaoVermelho;
@@ -14,6 +13,7 @@ void updateVelocidadePosicao();
 void idle();
 bool haColisao();
 void renicializaBola();
+void atualizaHorizontal();
 
 void idle()
 {
@@ -42,22 +42,38 @@ void idle()
     vector<Plano *> colisaoVermelho = planosPosicaoZ(-0.0, vermelho);
     vector<Plano *> colisaoPreto = planosPosicaoZ(-0.0, preto);
 
+    atualizaHorizontal();
+
     tLast = t;
 
     glutPostRedisplay();
 }
 
+void atualizaHorizontal()
+{
+    float tamanho = vermelhoMovel.size();
+    if (tamanho > 0.0)
+    {
+        for (float i = 0; i < tamanho; i++)
+        {
+            Plano *it = vermelhoMovel[i];
+            movimentoHarminoco(it);
+        }
+    }
+}
+
 void movimentoHarminoco(Plano *p)
 {
-    float distance = p->GetfinalY() - p->GetinicialY();
+    float distance = p->GetfinalY() - p->GetinicialY() - 50;
 
-    movHarmonicoY += dt;
+    movHarmonicoY += (dt * MULT_MOV_H);
     if (movHarmonicoY > M_PI)
     {
         movHarmonicoY = 0.0;
     }
 
-    float newY = distance * cos(movHarmonicoY);
+    float newY = p->GetinicialY() + distance * cos(movHarmonicoY);
+
     p->SetposicaoY(newY);
 }
 

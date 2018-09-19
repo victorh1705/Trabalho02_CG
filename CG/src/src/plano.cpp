@@ -45,6 +45,30 @@ Plano::Plano(float inicialY, float finalY, float posicaoZ)
     this->alturaZ = TAMANHO_Z / 2.0;
 }
 
+Plano::Plano(float inicialY, float finalY, float posicaoZ, float movH)
+{
+    this->inicialY = inicialY;
+    this->finalY = finalY;
+    this->posicaoZ = posicaoZ;
+
+    float tamanhoY = 0;
+    if (finalY > inicialY)
+    {
+        tamanhoY = finalY - inicialY;
+    }
+    else
+    {
+        tamanhoY = inicialY - finalY;
+    }
+
+    this->posicaoX = 0.0;
+    this->posicaoZ = posicaoZ;
+
+    this->alturaX = TAMANHO_X / 2.0;
+    this->alturaY = 50.0;
+    this->alturaZ = TAMANHO_Z / 2.0;
+}
+
 Plano::~Plano()
 {
     //dtor

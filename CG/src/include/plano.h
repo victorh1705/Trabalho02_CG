@@ -11,6 +11,7 @@ public:
   Plano(float y);
   Plano(float y, float z);
   Plano(float inicialY, float finalY, float posicaoZ);
+  Plano(float inicialY, float finalY, float posicaoZ, float movH);
   virtual ~Plano();
 
   ///Get e Set

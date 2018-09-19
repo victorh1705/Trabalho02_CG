@@ -3,6 +3,8 @@
 void criarPlano(float posicaoInicialY, float posicaoFinalY, float translateZ);
 void criarPlanoPreto(float posicaoInicialY, float posicaoFinalY, float translateZ);
 void criarPlanoVermelho(float posicaoInicialY, float posicaoFinalY, float translateZ);
+void criarPlanoVermelhoMovel(float posicaoInicialY, float posicaoFinalY, float translateZ);
+void criarPlanoVariavel(Plano *p, float finalY);
 
 void criarLabirinto();
 void setPlanosVermelhos(Plano *p);
@@ -19,6 +21,8 @@ void setPreto50(float posicaoInicial, float z);
 
 void criarPlano(float posicaoInicialY, float posicaoFinalY, float translateZ);
 void criarPlano(Plano *p);
+
+void movimentoHarminoco(Plano *p);
 
 float aleatorio = 0.0;
 
@@ -37,6 +41,9 @@ void criaPlanos()
 
 void criarLabirinto()
 {
+    vermelho.clear();
+    vermelhoMovel.clear();
+    preto.clear();
 
     setVermelho100(-350.0, 0.0);
     setPreto100(-250.0, 0.0);
@@ -47,24 +54,33 @@ void criarLabirinto()
     setVermelho50(200.0, 0.0);
     completaVermelho(250.0, 0.0);
 
-    vermelho.push_back(new Plano(-100.0, -50.0, altura_entre_bloco * 1));
-    preto.push_back(new Plano(-50.0, -10.0, altura_entre_bloco * 1));
-    vermelho.push_back(new Plano(20.0, 750.0, altura_entre_bloco * 1));
-    preto.push_back(new Plano(75.0, 100.0, altura_entre_bloco * 1));
+    setPreto200(-350.0, 1.);
+    setVermelho50(-100.0, 1.);
+    setPreto100(-50., 1.);
+    setVermelho50(50., 1.);
+    setPreto100(100., 1.);
+    completaVermelho(200., 1.);
 
-    preto.push_back(new Plano(-200.0, 0.0, altura_entre_bloco * 2));
-    vermelho.push_back(new Plano(0.0, 20.0, altura_entre_bloco * 2));
-    vermelho.push_back(new Plano(50.0, 80.0, altura_entre_bloco * 2));
-    preto.push_back(new Plano(80.0, 200.0, altura_entre_bloco * 2));
+    setVermelho100(-350.0, 2);
+    setPreto50(-250.0, 2);
+    setPreto200(-150.0, 2);
+    setVermelho100(50.0, 2);
+    completaPreto(250.0, 2);
 
-    vermelho.push_back(new Plano(-200.0, -100.0, altura_entre_bloco * 3));
-    preto.push_back(new Plano(-100.0, -50.0, altura_entre_bloco * 3));
-    vermelho.push_back(new Plano(-10.0, 30.0, altura_entre_bloco * 3));
-    preto.push_back(new Plano(30.0, 100.0, altura_entre_bloco * 3));
+    setPreto100(-350.0, 3);
+    setVermelho100(-250.0, 3);
+    setPreto100(-150.0, 3);
+    setVermelho50(0.0, 3);
+    setPreto100(50.0, 3);
+    setVermelho100(150.0, 3);
+    completaPreto(250.0, 3);
 
-    preto.push_back(new Plano(-200.0, -50.0, altura_entre_bloco * 4));
-    vermelhoMovel.push_back(new Plano(-50.0, -20.0, altura_entre_bloco * 4));
-    preto.push_back(new Plano(30.0, 100.0, altura_entre_bloco * 4));
+        setPreto200(-350.0, 4);
+    setVermelho50(-150.0, 4);
+    setPreto50(-100.0, 4);
+    setVermelho50(-50.0, 4);
+    setPreto50(0.0, 4);
+    completaPreto(150.0, 4);
 
     setPreto200(-350.0, 5);
     setVermelho100(-100.0, 5);
@@ -113,6 +129,7 @@ void criarLabirinto()
     setPlanoAzul(new Plano(-350.0, 350.0, altura_entre_bloco * 40));
 
     for_each(vermelho.begin(), vermelho.end(), setPlanosVermelhos);
+    for_each(vermelhoMovel.begin(), vermelhoMovel.end(), setPlanosVermelhos);
     for_each(preto.begin(), preto.end(), setPlanosPretos);
 }
 
@@ -152,9 +169,15 @@ void criarPlano(Plano *p)
     glPopMatrix();
 }
 
+void criarPlanoVermelhoMovel(float posicaoInicialY, float posicaoFinalY, float translateZ)
+{
+    criarPlanoVariavel(new Plano(posicaoInicialY, translateZ), posicaoFinalY);
+}
+
 void criarPlanoVariavel(Plano *p, float finalY)
 {
     p->SetposicaoY(finalY);
+    vermelhoMovel.push_back(p);
 }
 
 void setPreto200(float posicaoInicial, float z)

@@ -43,6 +43,9 @@ float focoY = zBola;
 
 bool inicializado = false;
 
+float movHarmonicoY = 0.0;
+const float MULT_MOV_H = 0.01;
+
 #include <AbstractGeom.h>
 #include <Esfera.h>
 #include <plano.h>
@@ -61,6 +64,7 @@ Plano *fimAzul;
 void display(void);
 void init(void);
 void keyboard(unsigned char key, int x, int y);
+void movimentoHarminoco(Plano *p);
 
 void criaPlano()
 {
